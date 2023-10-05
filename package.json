@@ -2,9 +2,11 @@
   "name": "challenge-login",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch src/app.js"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +17,8 @@
     "mongoose": "^7.5.4",
     "mongoose-paginate-v2": "^1.7.4",
     "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "standard": "^17.1.0"
   }
 }
