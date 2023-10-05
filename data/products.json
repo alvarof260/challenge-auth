@@ -1,0 +1,161 @@
+[
+	{
+		"title": "Smartphone",
+		"description": "High-end smartphone with advanced features.",
+		"code": "PHN001",
+		"price": 799.99,
+		"status": true,
+		"stock": 100,
+		"category": "Electronics",
+		"thumbnails": [
+			"smartphone_thumbnail1.jpg",
+			"smartphone_thumbnail2.jpg",
+			"smartphone_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "Running Shoes",
+		"description": "Comfortable running shoes for your active lifestyle.",
+		"code": "SHS002",
+		"price": 89.99,
+		"status": true,
+		"stock": 50,
+		"category": "Clothing",
+		"thumbnails": [
+			"shoes_thumbnail1.jpg",
+			"shoes_thumbnail2.jpg",
+			"shoes_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "Cotton Sheets",
+		"description": "Soft and breathable cotton sheets for a good night's sleep.",
+		"code": "HME003",
+		"price": 39.99,
+		"status": true,
+		"stock": 200,
+		"category": "Home",
+		"thumbnails": [
+			"sheets_thumbnail1.jpg",
+			"sheets_thumbnail2.jpg",
+			"sheets_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "Organic Snacks Box",
+		"description": "A box of assorted organic and healthy snacks.",
+		"code": "GRB004",
+		"price": 24.99,
+		"status": true,
+		"stock": 30,
+		"category": "Groceries",
+		"thumbnails": [
+			"snacks_thumbnail1.jpg",
+			"snacks_thumbnail2.jpg",
+			"snacks_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "Bluetooth Speaker",
+		"description": "Portable Bluetooth speaker for music on the go.",
+		"code": "SPK005",
+		"price": 49.99,
+		"status": true,
+		"stock": 75,
+		"category": "Electronics",
+		"thumbnails": [
+			"speaker_thumbnail1.jpg",
+			"speaker_thumbnail2.jpg",
+			"speaker_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "Graphic T-Shirt",
+		"description": "Stylish graphic t-shirt with unique design.",
+		"code": "CLT006",
+		"price": 19.99,
+		"status": true,
+		"stock": 40,
+		"category": "Clothing",
+		"thumbnails": [
+			"shirt_thumbnail1.jpg",
+			"shirt_thumbnail2.jpg",
+			"shirt_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "Cookware Set",
+		"description": "Complete set of non-stick cookware for your kitchen.",
+		"code": "KTC007",
+		"price": 149.99,
+		"status": true,
+		"stock": 20,
+		"category": "Home",
+		"thumbnails": [
+			"cookware_thumbnail1.jpg",
+			"cookware_thumbnail2.jpg",
+			"cookware_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "Fresh Produce Bundle",
+		"description": "Assortment of fresh and locally sourced produce.",
+		"code": "GRP008",
+		"price": 29.99,
+		"status": true,
+		"stock": 15,
+		"category": "Groceries",
+		"thumbnails": [
+			"produce_thumbnail1.jpg",
+			"produce_thumbnail2.jpg",
+			"produce_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "Wireless Earbuds",
+		"description": "Wireless earbuds with noise-cancellation technology.",
+		"code": "EAR009",
+		"price": 79.99,
+		"status": true,
+		"stock": 60,
+		"category": "Electronics",
+		"thumbnails": [
+			"earbuds_thumbnail1.jpg",
+			"earbuds_thumbnail2.jpg",
+			"earbuds_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "Denim Jeans",
+		"description": "Classic denim jeans for a casual yet stylish look.",
+		"code": "CLT010",
+		"price": 59.99,
+		"status": true,
+		"stock": 25,
+		"category": "Clothing",
+		"thumbnails": [
+			"jeans_thumbnail1.jpg",
+			"jeans_thumbnail2.jpg",
+			"jeans_thumbnail3.jpg"
+		]
+	},
+	{
+		"title": "title",
+		"description": "High-end computer with advanced features.",
+		"code": "PCN005",
+		"price": 1799.99,
+		"status": true,
+		"stock": 50,
+		"category": "Electronics",
+		"thumbnails": []
+	},
+	{
+		"title": "producto 12",
+		"description": "producto 12",
+		"code": "MVP200",
+		"price": 912,
+		"status": true,
+		"stock": 200,
+		"category": "Home"
+	}
+]
