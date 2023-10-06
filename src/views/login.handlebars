@@ -1,12 +1,12 @@
 <div>
-    <form action="/api/session" method="post">
+    <form action="/api/session/login" method="post">
         <label for="user"> username:
-            <input type="text" name="username" id="user">
+            <input type="text" name="firstName" id="user">
         </label>
         <label for="pwd"> contraseña:
             <input type="password" name="password" id="pwd">
         </label>
         <button type="submit">log in</button>
-        <a href="#">register a user</a>
+        <a href="/register">register a user</a>
     </form>
 </div>

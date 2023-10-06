@@ -17,18 +17,19 @@ export const PORT = process.env.PORT ?? 8080
 const app = express()
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.engine('handlebars', handlebars.engine())
 app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'))
 app.use(session({
-  store:MongoStore.create({
+  store: MongoStore.create({
     mongoUrl: 'mongodb+srv://alvarof260:delfina2@cluster0.cmr6jcw.mongodb.net/?retryWrites=true&w=majority',
     dbName: 'e-commerce'
   }),
-  secret:"lakd1adaf",
-  resave:false,
-  saveUninitialized:false
+  secret: 'lakd1adaf',
+  resave: false,
+  saveUninitialized: false
 }))
 
 try {
@@ -56,7 +57,7 @@ try {
   app.use('/api/session', sessionRouter)
   app.use('/products', viewRouter)
   app.use('/chat', chatRouter)
-  app.use('/',sessionViewRouter)
+  app.use('/', sessionViewRouter)
 } catch (err) {
   console.log(err.message)
   process.exit(-1)
