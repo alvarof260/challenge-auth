@@ -5,6 +5,7 @@ import { getProducts } from './products-router.js'
 const router = Router()
 
 router.get('/', async (req, res) => {
+  const user = req.session.user
   const result = await getProducts(req, res)
   if (result.statusCode === 200) {
     const totalPages = []
@@ -19,6 +20,7 @@ router.get('/', async (req, res) => {
       totalPages.push({ page: index, link })
     }
     res.render('home', {
+      user,
       products: result.response.payload,
       paginateInfo: {
         hasPrevPage: result.response.hasPrevPage,
@@ -27,6 +29,7 @@ router.get('/', async (req, res) => {
         nextLink: result.response.nextLink,
         totalPages
       }
+
     })
   } else {
     res.status(result.statusCode).json({ status: 'error', error: result.response.error })
