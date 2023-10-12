@@ -1,10 +1,10 @@
 import { Router } from 'express'
 import { PORT } from '../app.js'
 import { getProducts } from './products-router.js'
-
+import { privateRoutes } from '../middlewares/auth.js'
 const router = Router()
 
-router.get('/', async (req, res) => {
+router.get('/', privateRoutes, async (req, res) => {
   const user = req.session.user
   const result = await getProducts(req, res)
   if (result.statusCode === 200) {
@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.get('/realTimeProducts', async (req, res) => {
+router.get('/realTimeProducts', privateRoutes, async (req, res) => {
   const result = await getProducts(req, res)
   if (result.statusCode === 200) {
     res.render('realTimeProducts', { products: result.response.payload })

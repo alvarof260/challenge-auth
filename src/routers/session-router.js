@@ -1,26 +1,22 @@
 import { Router } from 'express'
-import { userDAO } from '../dao/models/users.js'
+import passport from 'passport'
+
 const router = Router()
 
-router.post('/login', async (req, res) => {
-  const { firstName, password } = req.body
-  const user = await userDAO.findOne({ firstName, password }).lean().exec()
-  if (!user) {
-    console.log('no pasaste pa!')
-    return res.redirect('/')
+router.post('/login', passport.authenticate('login', { failureRedirect: '/' }), async (req, res) => {
+  if (!req.user) {
+    return res.status(400).send({ error: 'invalid credentials' })
   }
-  if (user.email === 'adminCoder@coder.com' && user.password === 'adminCod3r123') {
-    user.role = 'admin'
-  } else {
-    user.role = 'user'
+  req.session.user = {
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
+    email: req.user.email,
+    age: req.user.age
   }
-  req.session.user = user
   res.redirect('/products')
 })
 
-router.post('/register', async (req, res) => {
-  const userToRegister = req.body
-  await userDAO.create(userToRegister)
+router.post('/register', passport.authenticate('register', { failureRedirect: '/register' }), async (req, res) => {
   res.redirect('/')
 })
 

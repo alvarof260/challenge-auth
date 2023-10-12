@@ -1,8 +1,9 @@
 import { Router } from 'express'
+import { privateRoutes } from '../middlewares/auth.js'
 
 const router = Router()
 
-router.get('/', (req, res) => {
+router.get('/', privateRoutes, (req, res) => {
   res.render('chat', {})
 })
 

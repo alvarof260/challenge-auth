@@ -12,6 +12,8 @@ import viewRouter from './routers/views-router.js'
 import chatRouter from './routers/chat-router.js'
 import sessionRouter from './routers/session-router.js'
 import sessionViewRouter from './routers/views-session-router.js'
+import { initializePassport } from './config/passport.js'
+import passport from 'passport'
 
 export const PORT = process.env.PORT ?? 8080
 const app = express()
@@ -31,6 +33,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }))
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 try {
   await mongoose.connect('mongodb+srv://alvarof260:delfina2@cluster0.cmr6jcw.mongodb.net/e-commerce')
