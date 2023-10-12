@@ -20,6 +20,15 @@ router.post('/register', passport.authenticate('register', { failureRedirect: '/
   res.redirect('/')
 })
 
+router.get('/github', passport.authenticate('github', { scope: ['user:email'] }), (req, res) => {
+
+})
+
+router.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/' }), (req, res) => {
+  console.log(req.user)
+  req.session.user = req.user
+  res.redirect('/products')
+})
 router.get('/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) {
