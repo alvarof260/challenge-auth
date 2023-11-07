@@ -14,8 +14,9 @@ import sessionRouter from './routers/session-router.js'
 import sessionViewRouter from './routers/views-session-router.js'
 import { initializePassport } from './config/passport.js'
 import passport from 'passport'
+import cfg from './config/config.js'
 
-export const PORT = process.env.PORT ?? 8080
+export const PORT = cfg.PORT
 const app = express()
 
 app.use(express.json())
@@ -26,10 +27,10 @@ app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'))
 app.use(session({
   store: MongoStore.create({
-    mongoUrl: 'mongodb+srv://alvarof260:delfina2@cluster0.cmr6jcw.mongodb.net/?retryWrites=true&w=majority',
-    dbName: 'e-commerce'
+    mongoUrl: cfg.MONGO_DB_URL,
+    dbName: cfg.MONGO_DB_NAME
   }),
-  secret: 'lakd1adaf',
+  secret: cfg.SESSION_SIGN,
   resave: false,
   saveUninitialized: false
 }))
@@ -38,7 +39,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 try {
-  await mongoose.connect('mongodb+srv://alvarof260:delfina2@cluster0.cmr6jcw.mongodb.net/e-commerce')
+  await mongoose.connect(cfg.MONGO_CONNECT)
   console.log('db connect')
   const httpServer = app.listen(PORT, () => {
     console.log(`listen on http://localhost:${PORT}`)
