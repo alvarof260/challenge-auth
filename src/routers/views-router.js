@@ -1,48 +1,11 @@
 import { Router } from 'express'
-import { PORT } from '../app.js'
-import { getProducts } from './products-router.js'
 import { privateRoutes } from '../middlewares/auth.js'
+import { viewProducts, viewProductsRealTime } from '../controllers/product.js'
+
 const router = Router()
 
-router.get('/', privateRoutes, async (req, res) => {
-  const user = req.session.user
-  const result = await getProducts(req, res)
-  if (result.statusCode === 200) {
-    const totalPages = []
-    let link
-    for (let index = 1; index <= result.response.totalPages; index++) {
-      if (!req.query.page) {
-        link = `http://${req.hostname}:${PORT}${req.originalUrl}&page=${index}`
-      } else {
-        const modifiedUrl = req.originalUrl.replace(`page=${req.query.page}`, `page=${index}`)
-        link = `http://${req.hostname}:${PORT}${modifiedUrl}`
-      }
-      totalPages.push({ page: index, link })
-    }
-    res.render('home', {
-      user,
-      products: result.response.payload,
-      paginateInfo: {
-        hasPrevPage: result.response.hasPrevPage,
-        hasNextPage: result.response.hasNextPage,
-        prevLink: result.response.prevLink,
-        nextLink: result.response.nextLink,
-        totalPages
-      }
+router.get('/', privateRoutes, viewProducts)
 
-    })
-  } else {
-    res.status(result.statusCode).json({ status: 'error', error: result.response.error })
-  }
-})
-
-router.get('/realTimeProducts', privateRoutes, async (req, res) => {
-  const result = await getProducts(req, res)
-  if (result.statusCode === 200) {
-    res.render('realTimeProducts', { products: result.response.payload })
-  } else {
-    res.status(result.statusCode).json({ status: 'error', error: result.response.error })
-  }
-})
+router.get('/realTimeProducts', privateRoutes, viewProductsRealTime)
 
 export default router

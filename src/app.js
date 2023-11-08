@@ -39,7 +39,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 try {
-  await mongoose.connect(cfg.MONGO_CONNECT)
+  await mongoose.connect(cfg.MONGO_CONNECT, {
+    dbName: cfg.MONGO_DB_NAME
+  })
   console.log('db connect')
   const httpServer = app.listen(PORT, () => {
     console.log(`listen on http://localhost:${PORT}`)
