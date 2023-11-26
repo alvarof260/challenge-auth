@@ -1,11 +1,11 @@
 import cfg from '../config/config.js'
 
-export let product
+export let Product
 
 switch (cfg.config.PERSISTENCE) {
   case 'MONGO':
     const { default: ProductMongo } = await import('./product-mongo.js')
-    product = ProductMongo
+    Product = ProductMongo
     break
 
   default:
