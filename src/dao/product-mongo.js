@@ -54,5 +54,5 @@ export default class ProductMongo {
 
   create = async (data) => await productModel.create(data)
   update = async (id, data) => await productModel.findByIdAndUpdate(id, data, { returnDocument: 'after' })
-  delete = async (id) => await productModel.findByIdAndDelete(id)
+  delete = async (id) => await productModel.findByIdAndDelete(id, { returnDocument: 'after' })
 }
