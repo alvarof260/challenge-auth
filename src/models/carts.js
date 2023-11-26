@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const cartsSchema = new mongoose.Schema({
+const cartSchema = new mongoose.Schema({
   id: Number,
   products: {
     type: [{
@@ -15,4 +15,4 @@ const cartsSchema = new mongoose.Schema({
   }
 })
 
-export const cartsDAO = mongoose.model('carts', cartsSchema)
+export const cartModel = mongoose.model('carts', cartSchema)
