@@ -1,5 +1,4 @@
 import { ProductService } from '../repositories/index.js'
-import cfg from '../config/config.js'
 
 export const getProducts = async (req, res) => {
   const result = await ProductService.getAllPaginate(req, res)

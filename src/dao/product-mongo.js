@@ -1,4 +1,4 @@
-import productModel from '../models/products.js'
+import { productModel } from '../models/products.js'
 import cfg from '../config/config.js'
 
 export default class ProductMongo {

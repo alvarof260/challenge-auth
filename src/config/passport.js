@@ -1,7 +1,7 @@
 import passport from 'passport'
 import local from 'passport-local'
-import { userDAO } from '../dao/models/users.js'
-import { cartsDAO } from '../dao/models/carts.js'
+import { userModel } from '../models/users.js'
+import { cartModel } from '../models/carts.js'
 import { createHash, isValidPassword } from '../utils.js'
 import GithubStrategy from 'passport-github2'
 
@@ -14,11 +14,11 @@ export const initializePassport = () => {
   }, async (req, username, password, done) => {
     const { firstName, lastName, email, age } = req.body
     try {
-      const user = await userDAO.findOne({ email: username })
+      const user = await userModel.findOne({ email: username })
       if (user) {
         return done(null, false)
       }
-      const cartFromNewUser = await cartsDAO.create({})
+      const cartFromNewUser = await cartModel.create({})
       const newUser = {
         firstName,
         lastName,
@@ -28,7 +28,7 @@ export const initializePassport = () => {
         cart: cartFromNewUser._id,
         role: (email === 'adminCoder@coder.com') ? 'admin' : 'user'
       }
-      const result = await userDAO.create(newUser)
+      const result = await userModel.create(newUser)
       return done(null, result)
     } catch (err) {
       return done(err)
@@ -39,7 +39,7 @@ export const initializePassport = () => {
     usernameField: 'email'
   }, async (username, password, done) => {
     try {
-      const user = await userDAO.findOne({ email: username })
+      const user = await userModel.findOne({ email: username })
       if (!user) {
         return done(null, user)
       }
@@ -57,9 +57,9 @@ export const initializePassport = () => {
   }, async (accessToken, refeshToken, profile, done) => {
     console.log(profile)
     try {
-      const user = await userDAO.findOne({ email: profile._json.email })
+      const user = await userModel.findOne({ email: profile._json.email })
       if (user) return done(null, user)
-      const newUser = await userDAO.create({
+      const newUser = await userModel.create({
         firstName: profile._json.name,
         lastName: '',
         email: profile._json.email,
@@ -76,7 +76,7 @@ export const initializePassport = () => {
   })
 
   passport.deserializeUser(async (id, done) => {
-    const user = await userDAO.findById(id)
+    const user = await userModel.findById(id)
     done(null, user)
   })
 }

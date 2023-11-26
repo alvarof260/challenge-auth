@@ -2,7 +2,6 @@ import { ProductService } from '../repositories/index.js'
 import cfg from '../config/config.js'
 
 export const viewProducts = async (req, res) => {
-  const user = req.session.user
   const result = await ProductService.getAllPaginate(req, res)
   if (result.statusCode === 200) {
     const totalPages = []
@@ -16,6 +15,7 @@ export const viewProducts = async (req, res) => {
       }
       totalPages.push({ page: index, link })
     }
+    const user = req.session.user
     res.render('home', {
       user,
       products: result.response.payload,
