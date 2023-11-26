@@ -33,6 +33,7 @@
         <tbody>
             {{#each products}}
                 <tr>
+                    <td><button onclick="addProductToCart('{{this._id}}')">Add To Cart</button></td>
                     <td>{{this.id}}</td>
                     <td>{{this.title}}</td>
                     <td>{{this.description}}</td>
@@ -46,3 +47,19 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    addProductToCart = (pid, cid) => {
+        fetch(`/api/carts/{{user.cart}}/product/${pid}`, {
+            method: 'post'
+        })
+            .then(result => result.json())
+            .then(result => {
+                console.log(result)
+                if (result.status === 'error') throw new Error(result.error)
+                alert(`Ok. Todo salió bien! :)\nEl producto se agregó al carrito con id=${result._id}!`)
+            })
+            .catch(err => alert(`Ocurrió un error :(\n${err}`))
+        
+    }
+</script>
