@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const usersSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, unique: true, required: true },
@@ -10,4 +10,4 @@ const usersSchema = new mongoose.Schema({
   cart: { type: mongoose.Schema.Types.ObjectId, ref: 'carts' }
 })
 
-export const userDAO = mongoose.model('users', usersSchema)
+export const userModel = mongoose.model('users', userSchema)
