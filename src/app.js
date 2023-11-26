@@ -16,7 +16,7 @@ import { initializePassport } from './config/passport.js'
 import passport from 'passport'
 import cfg from './config/config.js'
 
-export const PORT = cfg.PORT
+export const PORT = cfg.config.PORT
 const app = express()
 
 app.use(express.json())
@@ -27,10 +27,10 @@ app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'))
 app.use(session({
   store: MongoStore.create({
-    mongoUrl: cfg.MONGO_DB_URL,
-    dbName: cfg.MONGO_DB_NAME
+    mongoUrl: cfg.mongo.MONGO_DB_URL,
+    dbName: cfg.mongo.MONGO_DB_NAME
   }),
-  secret: cfg.SESSION_SIGN,
+  secret: cfg.config.SESSION_SIGN,
   resave: false,
   saveUninitialized: false
 }))
@@ -39,8 +39,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 try {
-  await mongoose.connect(cfg.MONGO_CONNECT, {
-    dbName: cfg.MONGO_DB_NAME
+  await mongoose.connect(cfg.mongo.MONGO_CONNECT, {
+    dbName: cfg.mongo.MONGO_DB_NAME
   })
   console.log('db connect')
   const httpServer = app.listen(PORT, () => {
