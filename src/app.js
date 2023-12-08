@@ -14,6 +14,7 @@ import viewRouter from './routers/views-router.js'
 import chatRouter from './routers/chat-router.js'
 import sessionRouter from './routers/session-router.js'
 import sessionViewRouter from './routers/views-session-router.js'
+import mockingRouter from './routers/mocking-router.js'
 import { initializePassport } from './config/passport.js'
 import cfg from './config/config.js'
 
@@ -67,6 +68,7 @@ try {
   app.use('/products', viewRouter)
   app.use('/chat', chatRouter)
   app.use('/', sessionViewRouter)
+  app.use('/mockingproducts', mockingRouter)
 } catch (err) {
   console.log(err.message)
   process.exit(-1)

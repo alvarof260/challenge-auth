@@ -1,4 +1,7 @@
 import { ProductService } from '../repositories/index.js'
+import EErros from '../services/errors/enums.js'
+import CustomError from '../services/errors/custom-error.js'
+import { generateErrorInfo } from '../services/errors/message.js'
 
 export const getProducts = async (req, res) => {
   const result = await ProductService.getAllPaginate(req, res)
@@ -19,8 +22,19 @@ export const getProductByID = async (req, res) => {
 export const createProduct = async (req, res) => {
   try {
     const product = req.body
-    const result = await ProductService.create(product)
-    res.status(201).json({ result })
+
+    if (!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock || !product.thumbnail) {
+      const error = CustomError.createError({
+        name: 'ERROR EN LA CREACIÓN DEL PRODUCTO',
+        cause: generateErrorInfo(product),
+        message: 'El producto no se pudo crear debido a que faltan propiedades.',
+        code: EErros.INVALID_TYPES_ERROR
+      })
+      return res.status(400).send(error.cause)
+    } else {
+      const result = await ProductService.create(product)
+      res.status(201).json({ result })
+    }
   } catch (err) {
     res.status(500).json({ status: 'error', error: err.message })
   }
