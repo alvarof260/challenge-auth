@@ -1,8 +1,10 @@
+import logger from '../config/logger.js'
+
 export const privateRoutes = (req, res, next) => {
   if (req.session?.user) {
     next()
   } else {
-    console.log('redirect')
+    logger.info('redirect')
     res.redirect('/')
   }
 }
