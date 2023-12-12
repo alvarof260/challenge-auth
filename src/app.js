@@ -15,8 +15,10 @@ import chatRouter from './routers/chat-router.js'
 import sessionRouter from './routers/session-router.js'
 import sessionViewRouter from './routers/views-session-router.js'
 import mockingRouter from './routers/mocking-router.js'
+import loggerRouter from './routers/logger-router.js'
 import { initializePassport } from './config/passport.js'
 import cfg from './config/config.js'
+import logger from './config/logger.js'
 
 export const PORT = cfg.config.PORT
 const app = express()
@@ -44,13 +46,13 @@ try {
   await mongoose.connect(cfg.mongo.MONGO_CONNECT, {
     dbName: cfg.mongo.MONGO_DB_NAME
   })
-  console.log('db connect')
+  logger.info('db connect')
   const httpServer = app.listen(PORT, () => {
-    console.log(`listen on http://localhost:${PORT}`)
+    logger.info(`listen on http://localhost:${PORT}`)
   })
   const socketServer = new Server(httpServer)
   socketServer.on('connection', async socketClient => {
-    console.log('nuevo cliente conectado')
+    logger.info('nuevo cliente conectado')
     socketClient.on('productList', data => {
       socketServer.emit('updatedProducts', data)
     })
@@ -69,7 +71,8 @@ try {
   app.use('/chat', chatRouter)
   app.use('/', sessionViewRouter)
   app.use('/mockingproducts', mockingRouter)
+  app.use('/loggerTest', loggerRouter)
 } catch (err) {
-  console.log(err.message)
+  logger.error(err.message)
   process.exit(-1)
 }

@@ -6,7 +6,8 @@ export default {
   config: {
     PORT: process.env.PORT,
     SESSION_SIGN: process.env.SESSION_SIGN,
-    PERSISTENCE: process.env.PERSISTENCE
+    PERSISTENCE: process.env.PERSISTENCE,
+    ENVIROMENT: process.env.ENVIROMENT
   },
   mongo: {
     MONGO_DB_NAME: process.env.MONGO_DB_NAME,
