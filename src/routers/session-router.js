@@ -14,4 +14,5 @@ router.get('/githubcallback', passport.authenticate('github', { failureRedirect:
 
 router.get('/logout', logout)
 
+router.get('/forget-password')
 export default router

@@ -33,3 +33,34 @@ export const logout = (req, res) => {
   }
   )
 }
+
+export const forgetPassword = async (req, res) => {
+  const email = req.body.email
+
+  const user = await UserService.findOne({ email })
+  if (!user) {
+    return res.status(404).json({ status: 'error', error: 'User does not found' })
+  }
+  const code = generateRandomCode()
+
+  await CPSService.create({ email, code })
+
+  const mailerConfig = {
+    service: 'gmail',
+    auth: { user: cfg.NODEMAILER_EMAIL, pass: cfg.NODEMAILER_PASSWORD },
+    tls: { rejectUnauthorized: false }
+  }
+  const transporter = nodemailer.createTransport(mailerConfig)
+  const message = {
+    from: cfg.NODEMAILER_EMAIL,
+    to: email,
+    subject: '[ecommerce] Reset your password',
+    html: `<h1>[Coder e-comm API] Reset your password</h1><hr />You have asked to reset your password. You can do it here: <a href="http://${req.hostname}:${cfg.PORT}/api/sessions/CPS/verify-code/${code}">http://${req.hostname}:${cfg.PORT}/api/sessions/CPS/verify-code/${code}</a><hr />Best regards,<br><strong>e-commerce team</strong>`
+  }
+  try {
+    await transporter.sendMail(message)
+    return res.json({ status: 'success', message: `Email successfully sent to ${email} in order to reset password` })
+  } catch (err) {
+    res.status(500).json({ status: 'error', error: err.message })
+  }
+}
