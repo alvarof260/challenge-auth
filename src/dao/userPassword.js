@@ -1,6 +1,6 @@
-import userPasswordModel from '../models/userPassword.js'
+import { userPasswordModel } from '../models/userPassword.js'
 
-export default class CPSMongoDao {
+export default class UserPasswordMongo {
   getAllSols = async () => await userPasswordModel.find().lean().exec()
   getSolById = async (id) => await userPasswordModel.findById(id).lean().exec()
   createSol = async (data) => await userPasswordModel.create(data)
