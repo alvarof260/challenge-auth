@@ -10,4 +10,8 @@ router.get('/register', (req, res) => {
   res.render('register')
 })
 
+router.get('/forget-password', (req, res) => {
+  res.render('forget-password')
+})
+
 export default router
