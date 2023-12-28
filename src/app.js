@@ -43,7 +43,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 try {
-  await mongoose.connect(cfg.mongo.MONGO_CONNECT, {
+  await mongoose.connect(cfg.mongo.MONGO_DB_URL, {
     dbName: cfg.mongo.MONGO_DB_NAME
   })
   logger.info('db connect')

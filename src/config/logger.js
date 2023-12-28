@@ -1,5 +1,5 @@
 import winston from 'winston'
-import cfg from '../src/config/config.js'
+import cfg from '../config/config.js'
 
 const customWinstonLevels = {
   levels: {

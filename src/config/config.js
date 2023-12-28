@@ -11,9 +11,6 @@ export default {
   },
   mongo: {
     MONGO_DB_NAME: process.env.MONGO_DB_NAME,
-    ADMIN_USER: process.env.ADMIN_USER,
-    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
-    MONGO_DB_URL: process.env.MONGO_DB_URL,
-    MONGO_CONNECT: process.env.MONGO_CONNECT
+    MONGO_DB_URL: process.env.MONGO_DB_URL
   }
 }
