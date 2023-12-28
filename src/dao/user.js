@@ -1,6 +1,6 @@
 import { userModel } from '../models/users.js'
 
-export default class userMongo {
+export default class UserMongo {
   getUsers = async () => await userModel.find().lean().exec()
   getById = async (id) => await userModel.findById(id).lean().exec()
   create = async (data) => await userModel.create(data)

@@ -14,4 +14,8 @@ router.get('/forget-password', (req, res) => {
   res.render('forget-password')
 })
 
+router.get('/reset-password/:code', async (req, res) => {
+
+})
+
 export default router
