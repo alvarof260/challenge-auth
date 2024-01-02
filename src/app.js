@@ -5,6 +5,8 @@ import mongoose from 'mongoose'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import passport from 'passport'
+import swaggerJSDoc from 'swagger-jsdoc'
+import swaggerUiExpress from 'swagger-ui-express'
 
 import __dirname from './utils.js'
 import { messageModel } from './models/message.js'
@@ -42,6 +44,19 @@ initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
 
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.1',
+    info: {
+      title: 'Documentacion Api',
+      description: 'Como funciona la api de mi e-commerce'
+    }
+  },
+  apis: ['./docs/**/*.yaml']
+}
+
+const specs = swaggerJSDoc(swaggerOptions)
+app.use('/docs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 try {
   await mongoose.connect(cfg.mongo.MONGO_DB_URL, {
     dbName: cfg.mongo.MONGO_DB_NAME

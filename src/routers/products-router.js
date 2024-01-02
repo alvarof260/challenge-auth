@@ -4,9 +4,9 @@ import { createProduct, deleteProduct, getProductByID, getProducts, updateProduc
 
 const router = Router()
 
-router.get('/', handlePolicies(['USER', 'ADMIN']), getProducts)
+router.get('/', handlePolicies(['USER', 'PREMIUM', 'ADMIN']), getProducts)
 
-router.get('/:id', handlePolicies(['USER', 'ADMIN']), getProductByID)
+router.get('/:id', handlePolicies(['USER', 'PREMIUM', 'ADMIN']), getProductByID)
 
 router.post('/', handlePolicies(['ADMIN', 'PREMIUM']), createProduct)
 

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { handlePolicies } from '../middlewares/auth'
+import { handlePolicies } from '../middlewares/auth.js'
 
 const router = Router()
 

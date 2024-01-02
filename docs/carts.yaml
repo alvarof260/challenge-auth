@@ -1,0 +1,308 @@
+paths:
+  /api/carts:
+    post:
+      tags: 
+        - Carts
+      summary: Create a new cart
+      responses:
+        200:
+          description: Successful operation. New cart created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        500:
+          description: failled operation. Server Problem here
+          content:
+            application/json:
+              example:
+                status: error
+                error: server conection failled.
+
+  /api/carts/{cid}:
+    get:
+      tags: 
+        - Carts
+      summary: Get a cart by ID
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          description: ID of the cart
+          example: "654efb3a29395096d4d464c4"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                status: success
+                payload: {
+                  ObjectId: "654efb3a29395096d4d464c4",
+                  products: [
+                    {product: "6513a2268803bccd46fbd693 (product Id)",
+                    quantity: 5},
+                    {product: "6513a2268803bccd46fbd695 (product Id)",
+                    quantity: 4},
+                    {product: "6513a2268803bccd46fbd692 (product Id)",
+                    quantity: 3},
+                    ]
+                }
+        "400":
+          description: failled operation
+          content: 
+            application/json:
+              example:
+                status: error
+                error: cart not found
+    put:
+      tags: 
+        - Carts
+      summary: Update a cart by ID
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          description: ID of the cart
+          example: "654efb3a29395096d4d464c4"
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example: 
+              products: [
+                    {product: "6513a2268803bccd46fbd693 (product Id)",
+                    quantity: 5},
+                    {product: "6513a2268803bccd46fbd695 (product Id)",
+                    quantity: 4},
+                    {product: "6513a2268803bccd46fbd692 (product Id)",
+                    quantity: 3},
+                    ]
+
+              required:
+                - products
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                status: Success
+                payload: {
+                  ObjectId: "654efb3a29395096d4d464c4",
+                  products: [
+                    {product: "6513a2268803bccd46fbd693 (product Id)",
+                    quantity: 5},
+                    {product: "6513a2268803bccd46fbd695 (product Id)",
+                    quantity: 4},
+                    {product: "6513a2268803bccd46fbd692 (product Id)",
+                    quantity: 3},
+                    ]
+                }
+        '400':
+          description: failled operation
+          content:
+            application/json:
+              example:
+                status:
+                error: cart does not found
+    delete:
+      tags: 
+        - Carts
+      summary: Delete a cart by ID
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          description: ID of the cart
+          example: "654efb3a29395096d4d464c4"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example: {
+                status: success,
+                payload: {
+                  ObjectId: "654efb3a29395096d4d464c4",
+                  products: [
+                    ]
+                }
+              }
+        '400':
+          description: operation failled
+          content:
+            application/json:
+              example:
+                status: error
+                error: cart does not found
+
+  /api/carts/{cid}/products/{pid}:
+    post:
+      tags: 
+        - Carts
+      summary: push a product to a cart
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID of the cart
+          example: "654efb3a29395096d4d464c4"
+          
+        - name: pid
+          in: path
+          required: true
+          description: ID of the product to push
+          example: "6513a2268803bccd46fbd69d"
+
+      responses: 
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example: {
+                status: Success,
+                payload: {
+                  ObjectId: "654efb3a29395096d4d464c4",
+                  products: [
+                    {product: "6513a2268803bccd46fbd69d (product Id)",
+                    quantity: 1},
+                    ]
+                }
+              }
+        '400':
+          description: operation failled
+          content:
+            application/json:
+              example:
+                status: error
+                error: product/cart does not found
+    delete:
+      tags: 
+        - Carts
+      summary: Delete a product from the cart
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID of the cart
+          example: "654efb3a29395096d4d464c4"
+        - name: pid
+          in: path
+          required: true
+          description: ID of the product to delete
+          example: "6513a2268803bccd46fbd69d"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                status: success
+                payload: {
+                  ObjectId: "654efb3a29395096d4d464c4",
+                  products: []
+                }
+        '400':
+          description: operation failled
+          content:
+            application/json:
+              example:
+                status: error
+                error: product/cart does not found
+    put:
+      tags: 
+        - Carts
+      summary: update a product to a cart
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID of the cart
+          example: 654efb3a29395096d4d464c4
+        - name: pid
+          in: path
+          required: true
+          description: ID of the product to update
+          example: 6513a2268803bccd46fbd69d
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              quantity: 7
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                status: success
+                payload: {
+                  ObjectId: "654efb3a29395096d4d464c4",
+                  products: [
+                    {
+                    product: "6513a2268803bccd46fbd693 (product Id)",
+                    quantity: 7
+                    }
+                  ]
+                }
+        '400':
+          description: operation failled
+          content:
+            application/json:
+              example:
+                status: error
+                error: product/cart does not found
+
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id: 
+          type: string
+          description: The ID is generated by Mongo
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        status:
+          type: "boolean"
+        thumbnail:
+          type: "string"
+        code:
+          type: string
+        stock:
+          type: number
+        category:
+          type: string
+        owner:
+          type: string
+      required:
+        - title
+        - category
+        - price
+        - stock
+    
+    Cart:
+      type: object
+      properties:
+        _id: 
+          type: string
+          description: The ID is generated by Mongo
+        products:
+          type: object
+          properties:
+            product:
+              $ref: '#/components/schemas/Product'
+            quantity:
+              type: number
+      required:
+        - products

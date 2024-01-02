@@ -1,0 +1,379 @@
+paths:
+  /api/products:
+    get:
+      tags: 
+        - products
+      summary: Get all products
+      responses:
+        "200":
+          description: Successfull operation
+          content:
+            application/json:
+              example: {
+                status: sucess,
+                payload: [
+                      {
+                        "title": "Smartphone",
+                        "description": "High-end smartphone with advanced features.",
+                        "code": "PHN001",
+                        "price": 799.99,
+                        "status": true,
+                        "stock": 100,
+                        "category": "Electronics",
+                        "thumbnails": [
+                          "smartphone_thumbnail1.jpg",
+                          "smartphone_thumbnail2.jpg",
+                          "smartphone_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "Running Shoes",
+                        "description": "Comfortable running shoes for your active lifestyle.",
+                        "code": "SHS002",
+                        "price": 89.99,
+                        "status": true,
+                        "stock": 50,
+                        "category": "Clothing",
+                        "thumbnails": [
+                          "shoes_thumbnail1.jpg",
+                          "shoes_thumbnail2.jpg",
+                          "shoes_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "Cotton Sheets",
+                        "description": "Soft and breathable cotton sheets for a good night's sleep.",
+                        "code": "HME003",
+                        "price": 39.99,
+                        "status": true,
+                        "stock": 200,
+                        "category": "Home",
+                        "thumbnails": [
+                          "sheets_thumbnail1.jpg",
+                          "sheets_thumbnail2.jpg",
+                          "sheets_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "Organic Snacks Box",
+                        "description": "A box of assorted organic and healthy snacks.",
+                        "code": "GRB004",
+                        "price": 24.99,
+                        "status": true,
+                        "stock": 30,
+                        "category": "Groceries",
+                        "thumbnails": [
+                          "snacks_thumbnail1.jpg",
+                          "snacks_thumbnail2.jpg",
+                          "snacks_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "Bluetooth Speaker",
+                        "description": "Portable Bluetooth speaker for music on the go.",
+                        "code": "SPK005",
+                        "price": 49.99,
+                        "status": true,
+                        "stock": 75,
+                        "category": "Electronics",
+                        "thumbnails": [
+                          "speaker_thumbnail1.jpg",
+                          "speaker_thumbnail2.jpg",
+                          "speaker_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "Graphic T-Shirt",
+                        "description": "Stylish graphic t-shirt with unique design.",
+                        "code": "CLT006",
+                        "price": 19.99,
+                        "status": true,
+                        "stock": 40,
+                        "category": "Clothing",
+                        "thumbnails": [
+                          "shirt_thumbnail1.jpg",
+                          "shirt_thumbnail2.jpg",
+                          "shirt_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "Cookware Set",
+                        "description": "Complete set of non-stick cookware for your kitchen.",
+                        "code": "KTC007",
+                        "price": 149.99,
+                        "status": true,
+                        "stock": 20,
+                        "category": "Home",
+                        "thumbnails": [
+                          "cookware_thumbnail1.jpg",
+                          "cookware_thumbnail2.jpg",
+                          "cookware_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "Fresh Produce Bundle",
+                        "description": "Assortment of fresh and locally sourced produce.",
+                        "code": "GRP008",
+                        "price": 29.99,
+                        "status": true,
+                        "stock": 15,
+                        "category": "Groceries",
+                        "thumbnails": [
+                          "produce_thumbnail1.jpg",
+                          "produce_thumbnail2.jpg",
+                          "produce_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "Wireless Earbuds",
+                        "description": "Wireless earbuds with noise-cancellation technology.",
+                        "code": "EAR009",
+                        "price": 79.99,
+                        "status": true,
+                        "stock": 60,
+                        "category": "Electronics",
+                        "thumbnails": [
+                          "earbuds_thumbnail1.jpg",
+                          "earbuds_thumbnail2.jpg",
+                          "earbuds_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "Denim Jeans",
+                        "description": "Classic denim jeans for a casual yet stylish look.",
+                        "code": "CLT010",
+                        "price": 59.99,
+                        "status": true,
+                        "stock": 25,
+                        "category": "Clothing",
+                        "thumbnails": [
+                          "jeans_thumbnail1.jpg",
+                          "jeans_thumbnail2.jpg",
+                          "jeans_thumbnail3.jpg"
+                        ]
+                      },
+                      {
+                        "title": "title",
+                        "description": "High-end computer with advanced features.",
+                        "code": "PCN005",
+                        "price": 1799.99,
+                        "status": true,
+                        "stock": 50,
+                        "category": "Electronics",
+                        "thumbnails": []
+                      }]
+                }
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/product'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                status: error
+                error: server problem here
+    post:
+      tags: 
+        - products
+      security: 
+        - bearerAuth: []
+      summary: Create a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              "payload": {
+                "title": "new product title",
+                "description": "new product description",
+                "code": "new product code",
+                "price": 1799.99,
+                "status": true,
+                "stock": 50,
+                "category": "new product category",
+                "thumbnails": []
+              }
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              example: {
+                        "status": "sucess",
+                        "payload": {
+                          "title": "new product title",
+                          "description": "new product description",
+                          "code": "new product code",
+                          "price": 1799.99,
+                          "status": true,
+                          "stock": 50,
+                          "category": "new product category",
+                          "thumbnails": []
+                        }           
+                      }
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/product'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                status: error
+                error: internal server error
+  /api/products/{pid}:
+    get:
+      tags: 
+        - products
+      summary: Get a product by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID of the product
+          example: "6513a2268803bccd46fbd69d"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                {
+                status: success,
+                payload: {
+                          "_id": {
+                            "$oid": "6512e897e34ad4ccc8cd2cc7"
+                          },
+                          "title": "Denim Jeans",
+                          "description": "Classic denim jeans for a casual yet stylish look.",
+                          "code": "CLT010",
+                          "price": 59.99,
+                          "status": true,
+                          "stock": 25,
+                          "category": "Clothing",
+                          "thumbnails": [
+                            "jeans_thumbnail1.jpg",
+                            "jeans_thumbnail2.jpg",
+                            "jeans_thumbnail3.jpg"
+                          ],
+                          "__v": 0
+                        }
+                }
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/product'
+        '400':
+          description: product does not found
+          content:
+            application/json:
+              example: {
+                status: "error",
+                error: "product does not found"
+                }
+    put:
+      tags: 
+        - products
+      summary: Update a product by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID of the product
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                $ref: '#/components/schemas/product'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/product'
+    delete:
+      tags: 
+        - products
+      summary: Delete a product by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID of the product
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example: {
+                status: success,
+                payload: {
+                          "_id": {
+                            "$oid": "6512e897e34ad4ccc8cd2cc7"
+                          },
+                          "title": "deleted product",
+                          "description": "deleted product",
+                          "code": "CLT010",
+                          "price": 59.99,
+                          "status": true,
+                          "stock": 25,
+                          "category": "Clothing",
+                          "thumbnails": [
+                            "deleted_product_thumbnail1.jpg",
+                            "deleted_product_thumbnail2.jpg",
+                            "deleted_product_thumbnail3.jpg"
+                          ],
+                          "__v": 0
+                        }
+                }
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/product'
+components:
+  schemas:
+    product:
+      type: object
+      properties:
+        title:
+          type: string
+        description: 
+          type: string
+        code: 
+          type: string
+          unique: true
+        price:
+          type: number
+        status: 
+          type: boolean
+        stock: 
+          type: number
+        category: 
+          type: string
+        thumbnails: 
+          type: [string]
+          default: []
+      require:
+        - title
+        - description
+        - code
+        - price
+        - status
+        - stock
+        - category
+    securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT 

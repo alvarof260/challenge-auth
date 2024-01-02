@@ -4,6 +4,7 @@ import { userModel } from '../models/users.js'
 import { cartModel } from '../models/carts.js'
 import { createHash, isValidPassword } from '../utils.js'
 import GithubStrategy from 'passport-github2'
+import logger from './logger.js'
 
 const LocalStrategy = local.Strategy
 
@@ -15,6 +16,7 @@ export const initializePassport = () => {
     const { firstName, lastName, email, age } = req.body
     try {
       const user = await userModel.findOne({ email: username })
+      logger.info(user)
       if (user) {
         return done(null, false)
       }
@@ -24,10 +26,11 @@ export const initializePassport = () => {
         lastName,
         email,
         age,
+        role: (email === 'adminCoder@coder.com') ? 'admin' : 'user',
         password: createHash(password),
-        cart: cartFromNewUser._id,
-        role: (email === 'adminCoder@coder.com') ? 'admin' : 'user'
+        cart: cartFromNewUser._id
       }
+      logger.info(JSON.stringify(newUser))
       const result = await userModel.create(newUser)
       return done(null, result)
     } catch (err) {
@@ -39,7 +42,9 @@ export const initializePassport = () => {
     usernameField: 'email'
   }, async (username, password, done) => {
     try {
+      logger.info(username)
       const user = await userModel.findOne({ email: username })
+      logger.info(user)
       if (!user) {
         return done(null, user)
       }
