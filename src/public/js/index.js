@@ -26,6 +26,7 @@ btn.addEventListener('click', () => {
     .then(result => {
       // eslint-disable-next-line no-undef
       if (result.error) throw new Error(result.error.issues)
+      console.log(result)
       socketClient.emit('productList', result)
       // eslint-disable-next-line no-undef
       alert('todo salio bien!')
